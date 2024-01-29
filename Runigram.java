@@ -174,8 +174,8 @@ public class Runigram {
 		{
 			for ( int j = 0; j < width; j ++)
 			{
-				int y = (int) (i * (h0 / height));
-				int x = (int) (j * (w0 / width));
+				int y = (int) (i * ((double) h0 / height));
+				int x = (int) (j * ((double) w0 / width));
 				// Gets color from the original image
 				Color originalColor = image[x][y];
 				ScaledImage [i][j] = originalColor;
@@ -208,7 +208,6 @@ public class Runigram {
 	 * The two images must have the same dimensions.
 	 */
 	public static Color[][] blend(Color[][] image1, Color[][] image2, double alpha) {
-		//// Replace the following statement with your code
 		Color[][] BlendImage = new Color[image1.length][image1[0].length];
 		for (int i = 0; i < BlendImage.length; i ++)
 		{
