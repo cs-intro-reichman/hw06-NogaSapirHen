@@ -194,9 +194,15 @@ public class Runigram {
 		int r = (int) ( alpha * c1.getRed() + (1 - alpha) * c2. getRed());
 		int g = (int) (alpha * c1.getGreen() + (1 - alpha) * c2. getGreen());
 		int b = (int) (alpha * c1.getBlue() + (1 - alpha) * c2. getBlue());
-		r = Math.min(Math.max(r, 0), 255);
-		g = Math.min(Math.max(g, 0), 255);
-		b = Math.min(Math.max(b, 0), 255);
+	//	r = Math.min(Math.max(r, 0), 255);
+		if (r > 255 )
+		r = r-255;
+		if (g > 255 )
+		g = g-255;
+		if (b > 255 )
+		b = b-255;
+	//	g = Math.min(Math.max(g, 0), 255);
+	//	b = Math.min(Math.max(b, 0), 255);
 		Color blended = new Color (r, g, b);
 		return blended;
 	}
