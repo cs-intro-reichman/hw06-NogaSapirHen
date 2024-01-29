@@ -10,9 +10,9 @@ public class Runigram {
 		//// Hide / change / add to the testing code below, as needed.
 		
 		// Tests the reading and printing of an image:	
-		Color[][] tinypic = read("tinypic.ppm");
+		Color[][] eyes = read("eyes.ppm");
 		Color[][] ironman = read("ironman.ppm");
-		print(tinypic);
+		print(eyes);
 
 		// Creates an image which will be the result of various 
 		// image processing operations:
@@ -29,7 +29,7 @@ public class Runigram {
 		//print(imageGrey);
 
 		// Tests the Scaling of an image:
-		//Color[][] imageScaled = scaled(tinypic, 3, 5);
+		//Color[][] imageScaled = scaled(eyes, 200, 150);
 		//System.out.println();
 		//print(imageScaled);
 
@@ -38,8 +38,9 @@ public class Runigram {
 		//System.out.println();
 		//print(imageBlend);
 
+
 		// Tests the morphing of two images:
-		Color[][] imageMorph = blend(tinypic, ironman, 4);
+		Color[][] imageMorph = blend(eyes, ironman, 4);
 		System.out.println();
 		print(imageMorph);
 
@@ -191,12 +192,9 @@ public class Runigram {
 		int r = (int) ( alpha * c1.getRed() + (1 - alpha) * c2. getRed());
 		int g = (int) (alpha * c1.getGreen() + (1 - alpha) * c2. getGreen());
 		int b = (int) (alpha * c1.getBlue() + (1 - alpha) * c2. getBlue());
-		if (r > 255 )
-		r = r-255;
-		if (g > 255 )
-		g = g-255;
-		if (b > 255 )
-		b = b-255;
+		r = Math.min(Math.max(r, 0), 255);
+		g = Math.min(Math.max(g, 0), 255);
+		b = Math.min(Math.max(b, 0), 255);
 		Color blended = new Color (r, g, b);
 		return blended;
 	}
@@ -228,19 +226,17 @@ public class Runigram {
 	 * of the source image.
 	 */
 	public static void morph(Color[][] source, Color[][] target, int n) {
-		//// Replace this comment with your code
 		if (!(source.length == target. length && source[0].length == target[0].length))
 		{
-			target = scaled (source, target.length, target[0].length);
+			source = scaled (source, target.length, target[0].length);
 		}
 		for ( int i = 0; i < n; i ++)
 		{
-			blend (source, target ,(n-i));
+			target = blend(source, target, (n-i));
 			setCanvas (target);
 			display(target);
 			StdDraw.pause(500);
 		}
-
 	}
 	
 	/** Creates a canvas for the given image. */
